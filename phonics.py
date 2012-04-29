@@ -78,9 +78,7 @@ PHONEMES = (
 	Consonant(u'x', 'kh', Position.VELAR, Articulation.FRICATIVE, False),
 	Consonant(u'\u0263', 'gh', Position.VELAR, Articulation.FRICATIVE, True),
 	Consonant(u'q', 'q', Position.UVULAR, Articulation.PLOSIVE, False),
-	Consonant(u'\u0262', 'c', Position.UVULAR, Articulation.PLOSIVE, True),
 	Consonant(u'\u03C7', 'qh', Position.UVULAR, Articulation.FRICATIVE, False),
-	Consonant(u'\u0281', 'ch', Position.UVULAR, Articulation.FRICATIVE, True),
 	Consonant(u'\u0294', '\'', Position.GLOTTAL, Articulation.FRICATIVE, False),
 	Consonant(u'h', 'h', Position.GLOTTAL, Articulation.FRICATIVE, False),
 )
