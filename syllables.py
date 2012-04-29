@@ -10,17 +10,17 @@ art_fp = [A.FRICATIVE, A.PLOSIVE]
 
 def valid_cluster(c):
 	l = len(c)
-
+	
 	if l < 2: return True
 	if l > 3: return False
-
+	
 	pairs = [(c[0], c[1])]
 	adj_pairs = [pairs[0]]
-
+	
 	if l == 3:
 		pairs += [(c[1], c[2]), (c[0], c[2])]
 		adj_pairs += [pairs[1]]
-
+	
 	for (c1, c2) in pairs:
 		if c1 == c2:
 			return False
@@ -31,11 +31,11 @@ def valid_cluster(c):
 				return False
 		if c1.articulation in art_al and c2.articulation in art_al:
 			return False
-
+			
 		if c1.articulation == A.NASAL and c2.articulation in art_al:
 			# nl / ngl / nr / mr
 			return False
-
+	
 	for (c1, c2) in adj_pairs:
 		if c1.voiced is not c2.voiced:
 			if c1.articulation in art_fp and c2.articulation in art_fp:
@@ -49,64 +49,61 @@ def valid_cluster(c):
 		if c1.position > Position.ALVEOLAR and c2.position > Position.ALVEOLAR:
 			if c1.articulation == c2.articulation:
 				return False
-
+		
 		if c1.articulation in art_al and c2.articulation == A.FRICATIVE:
 			return False
-
+	
 	if l == 3:
 		c1,c2,c3 = c
-
+		
 		if c2.articulation in art_pn:
 			if c3.position >= c2.position: # (c)kx / (c)kqh / (c)nqg
 				return False
-
+	
 	return True
-
+	
 def valid_codas(c):
 	l = len(c)
-
+	
 	if l < 2: return True
-
+	
 	pairs = [(c[0], c[1])]
 	adj_pairs = [pairs[0]]
-
+	
 	if l == 3:
 		pairs += [(c[1], c[2]), (c[0], c[2])]
 		adj_pairs += [pairs[1]]
-
+	
 	for pair in pairs:
-		c1,c2 = pair
-
+		c1, c2 = pair
+		
 		if c1.articulation == A.PLOSIVE:
 			if c2.articulation == A.NASAL:
 				return False
 		if c2.articulation in art_al: # No approx in syllable final
 			return False
-
+		
 	return True
-
+	
 def valid_onsets(c):
 	l = len(c)
-
+	
 	if l < 2: return True
-
+	
 	pairs = [(c[0], c[1])]
 	adj_pairs = [pairs[0]]
-
+	
 	if l == 3:
 		pairs += [(c[1], c[2]), (c[0], c[2])]
 		adj_pairs += [pairs[1]]
-
+	
 	for pair in pairs:
 		c1,c2 = pair
 		if c[0].articulation in art_al + [A.NASAL]: # approx in syllable initial
 			if c[1].articulation == A.PLOSIVE:
 				return False
-
-
-
+	
 	return True
-
 
 CONSONS = [ph for ph in PHONEMES if isinstance(ph, Consonant)]
 GLOTTALS = [ph for ph in CONSONS if ph.position is Position.GLOTTAL]
