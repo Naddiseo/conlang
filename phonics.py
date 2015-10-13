@@ -2,6 +2,7 @@ class Phoneme(object):
 	def __init__(self, ipa, ortho):
 		self.ipa = ipa
 		self.ortho = ortho
+		self.sonority = -1
 	
 	def __unicode__(self):
 		return self.ipa
@@ -26,6 +27,7 @@ class Vowel(Phoneme):
 		self.height = height
 		self.rounded = rounded
 		self.nasalized = nasalized
+		self.sonority = 99
 
 class Position(object):
 	BILABIAL = 1
@@ -39,11 +41,11 @@ class Position(object):
 	EPIGLOTTAL = 9
 
 class Articulation(object):
-	NASAL = 1
-	PLOSIVE = 2
-	FRICATIVE = 3
-	APPROX = 4
-	LATERAL = 5
+	APPROX = 1
+	LATERAL = 2
+	NASAL = 3
+	FRICATIVE = 4
+	PLOSIVE = 5
 
 class Consonant(Phoneme):
 	def __init__(self, ipa, ortho, position, articulation, voiced):
@@ -51,6 +53,7 @@ class Consonant(Phoneme):
 		self.position = position
 		self.articulation = articulation
 		self.voiced = voiced
+		self.sonority = articulation
 
 PHONEMES = (
 	Vowel(u'i', 'i', Frontness.FRONT, Height.HIGH, False, False),
