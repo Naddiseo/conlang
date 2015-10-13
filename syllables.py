@@ -130,11 +130,11 @@ onsets = codas + [[ph] for ph in GLOTTALS]
 codas = filter(valid_codas, codas)
 onsets = filter(valid_onsets, onsets)
 
-print len(nuclei), len(codas), len(onsets)
+print len(onsets), len(nuclei), len(codas)
 print '=', len(nuclei) * len(codas) * len(onsets)
 
 syllables = set()
-o = len(onsets) +len(nuclei)
+o = len(onsets) + len(nuclei)
 t = o
 i = 0
 for onset in onsets:
