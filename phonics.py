@@ -9,6 +9,13 @@ class Phoneme(object):
 	
 	def __str__(self):
 		return self.ortho
+	
+	def __eq__(self, other):
+		if isinstance(other, (unicode, str)):
+			return other == self.ortho
+		elif isinstance(other, Phoneme):
+			return other.ortho == self.ortho
+		return False
 
 class Frontness(object):
 	FRONT = 1
