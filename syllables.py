@@ -99,8 +99,8 @@ def valid_onsets(c):
 	
 	for pair in pairs:
 		c1,c2 = pair
-		if c[0].articulation in art_al + [A.NASAL]: # approx in syllable initial
-			if c[1].articulation == A.PLOSIVE:
+		if c1.articulation in art_al + [A.NASAL]: # approx in syllable initial
+			if c2.articulation == A.PLOSIVE:
 				return False
 	
 	return True
