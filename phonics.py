@@ -79,7 +79,7 @@ PHONEMES = (
 	Consonant(u'\u0263', 'gh', Position.VELAR, Articulation.FRICATIVE, True),
 	Consonant(u'q', 'q', Position.UVULAR, Articulation.PLOSIVE, False),
 	Consonant(u'\u03C7', 'qh', Position.UVULAR, Articulation.FRICATIVE, False),
-	Consonant(u'\u0294', '\'', Position.GLOTTAL, Articulation.FRICATIVE, False),
+	Consonant(u'\u0294', '\'', Position.GLOTTAL, Articulation.PLOSIVE, False),
 	Consonant(u'h', 'h', Position.GLOTTAL, Articulation.FRICATIVE, False),
 )
 
