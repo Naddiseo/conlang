@@ -35,6 +35,9 @@ def valid_cluster(c):
 		if c1.articulation == A.NASAL and c2.articulation in art_al:
 			# nl / ngl / nr / mr
 			return False
+		
+		if (c1 == 's' and c2 == 'sh') or (c1 == 'sh' and c2 == 's'):
+			return False
 	
 	for (c1, c2) in adj_pairs:
 		if c1.voiced is not c2.voiced:
@@ -77,16 +80,31 @@ def valid_codas(c):
 	for pair in pairs:
 		c1, c2 = pair
 		
+		if c1.sonority > c2.sonority: # Might violate sonority hierarchy
+			if c1.position == c2.position:
+				return False
+			if abs(c1.position - c2.position) < 2:
+				return False
+		
 		if c1.articulation == A.PLOSIVE:
 			if c2.articulation == A.NASAL:
 				return False
 		if c2.articulation in art_al: # No approx in syllable final
 			return False
+			
+			
 		
 	return True
-	
+#import pdb;pdb.set_trace()
+assert not valid_codas([p('k'), p('kh')])
+assert not valid_codas([p('b'), p('v')])
+
 def valid_onsets(c):
 	l = len(c)
+	
+	if l == 1:
+		if c[0].position == Position.GLOTTAL and c[0].articulation == A.PLOSIVE:
+			return False
 	
 	if l < 2: return True
 	
@@ -102,6 +120,11 @@ def valid_onsets(c):
 		if c1.articulation in art_al + [A.NASAL]: # approx in syllable initial
 			if c2.articulation == A.PLOSIVE:
 				return False
+		
+		if c1.position == Position.GLOTTAL and c1.articulation == A.PLOSIVE:
+			# disallow initial glottal stop
+			return False
+		
 	
 	return True
 
@@ -121,6 +144,7 @@ DIPH = [
 CLUSTERS = chain(
 	combinations(C, 1),
 	combinations(C, 2),
+	combinations(C, 3),
 )
 
 nuclei = [[ph] for ph in V] + DIPH
