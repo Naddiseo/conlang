@@ -16,6 +16,9 @@ class Phoneme(object):
 		elif isinstance(other, Phoneme):
 			return other.ortho == self.ortho
 		return False
+	
+	def __ne__(self, other):
+		return not (self == other)
 
 class Frontness(object):
 	FRONT = 1
